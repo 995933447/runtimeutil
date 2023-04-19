@@ -2,14 +2,13 @@ package runtimeutil
 
 import (
 	"fmt"
-	"gorm.io/gorm/logger"
 	"runtime/debug"
 	"strings"
 	"sync"
 )
 
 var (
-	Recover = RecoverToPrint
+	Recover         = RecoverToPrint
 	accessRecoverMu sync.RWMutex
 )
 
