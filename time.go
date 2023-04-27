@@ -1,6 +1,7 @@
 package runtimeutil
 
 import (
+	"math"
 	"strconv"
 	"time"
 )
@@ -210,7 +211,7 @@ func StringToTimestamp(date string) uint32 {
 	return uint32(t.Unix())
 }
 
-// 获取需要统计的日期 以及是否包含当天
+// GetDateListBetween2Times 获取需要统计的日期 以及是否包含当天
 func GetDateListBetween2Times(startTime, endTime int64) (out []uint32, haveToday bool) {
 	if startTime > endTime {
 		return nil, false
@@ -242,4 +243,8 @@ func GetDateListBetween2Times(startTime, endTime int64) (out []uint32, haveToday
 func GetTodayDate() uint32 {
 	today64, _ := strconv.ParseUint(time.Now().Format("20060102"), 10, 64)
 	return uint32(today64)
+}
+
+func CountDaysNumberBetweenTwoTimes(oneTime, otherTime time.Time) int {
+	return int(math.Abs(oneTime.Sub(otherTime).Hours()) / 24)
 }
