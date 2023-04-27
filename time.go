@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-func Minute2Day(minute uint32) uint32 {
+func Minute2Days(minute uint32) uint32 {
 	t := time.Unix(int64(minute)*60, 0)
 	return uint32(t.Year()*10000 + int(t.Month())*100 + t.Day())
 }
 
-func Second2Day(second uint32) uint32 {
+func Second2Days(second uint32) uint32 {
 	t := time.Unix(int64(second), 0)
 	return uint32(t.Year()*10000 + int(t.Month())*100 + t.Day())
 }
@@ -20,7 +20,7 @@ func AddDays(time uint32, days uint32) uint32 {
 	return time + sec
 }
 
-func Day2Second(date uint32) uint32 {
+func Date2Second(date uint32) uint32 {
 	if date == 0 {
 		return 0
 	}
