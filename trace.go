@@ -68,3 +68,11 @@ func RemoveTrace(gid int64) {
 func AutoRemoveTrace() {
 	RemoveTrace(goid.Get())
 }
+
+func GetTrace() string {
+	traceAny, ok := TraceMap.Load(goid.Get())
+	if ok {
+		return traceAny.(string)
+	}
+	return GenTraceStrId()
+}
