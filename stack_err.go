@@ -13,12 +13,12 @@ type StackErr struct {
 	CallLine     int
 }
 
-func NewStackErr(err error) *StackErr {
+func NewStackErrWithSkip(skip int, err error) *StackErr {
 	stackErr := &StackErr{
 		Err: err,
 	}
 
-	pc, callFile, callLine, ok := runtime.Caller(1)
+	pc, callFile, callLine, ok := runtime.Caller(skip)
 
 	var callFuncName string
 	if ok {
@@ -34,6 +34,10 @@ func NewStackErr(err error) *StackErr {
 	return stackErr
 }
 
+func NewStackErr(err error) *StackErr {
+	return NewStackErrWithSkip(2, err)
+}
+
 func (s *StackErr) Error() string {
-	return fmt.Sprintf("%s:%s:%d %s", s.FileName, s.CallFuncName, s.CallLine, s.Err.Error())
+	return fmt.Sprintf("%s:%s:%d line: %s", s.FileName, s.CallFuncName, s.CallLine, s.Err.Error())
 }
