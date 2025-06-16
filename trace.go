@@ -76,3 +76,10 @@ func GetTrace() string {
 	}
 	return GenTraceStrId()
 }
+
+func CreateTrace() string {
+	trace := GenTraceStrId()
+	TraceMap.Store(goid.Get(), trace)
+	return trace
+}
+
